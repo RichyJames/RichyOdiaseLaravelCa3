@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PlayerController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,7 +23,7 @@ Route::put('/teams/{team}', 'TeamController@update')->name('teams.update');
 Route::delete('/teams/{team}', 'TeamController@destroy')->name('teams.destroy');
 
 
-Route::get('/players', 'PlayerController@index')->name('players.index');
+Route::get('/players', [PlayerController::class, 'index'])->name('players.index');
 Route::get('/players/create', 'PlayerController@create')->name('players.create');
 Route::post('/players', 'PlayerController@store')->name('players.store');
 Route::get('/players/{player}', 'PlayerController@show')->name('players.show');
