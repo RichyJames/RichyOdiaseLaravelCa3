@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\TeamController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,8 +16,7 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/teams', 'TeamController@index')->name('teams.index');
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
 Route::get('/teams/create', 'TeamController@create')->name('teams.create');
 Route::post('/teams', 'TeamController@store')->name('teams.store');
 Route::get('/teams/{team}', 'TeamController@show')->name('teams.show');

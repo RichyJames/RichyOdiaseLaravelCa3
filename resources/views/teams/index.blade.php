@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players</title>
+    <title>Teams</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,22 +86,21 @@
     </div>
 
     <div class="container">
-        <h1>Players</h1>
+        <h1>Teams</h1>
         <table>
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Team</th>
-                    <!-- Add more columns as needed -->
+                    <th>City</th>
+                    <th>Coach</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Iterate through players and display their information -->
-                @foreach($players as $player)
+                @foreach($teams as $team)
                     <tr>
-                        <td>{{ $player->name }}</td>
-                        <td>{{ $player->team->name }}</td>
-                        <!-- Add more columns as needed -->
+                        <td>{{ $team->name }}</td>
+                        <td>{{ $team->city }}</td>
+                        <td>{{ $team->coach }}</td>
                     </tr>
                 @endforeach
             </tbody>
