@@ -1,21 +1,24 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Player;
+use App\Models\Team; 
 
 class PlayerController extends Controller
 {
-   
-public function index()
-{
-    $players = Player::all();
-    return view('players.index', compact('players'));
-}
+    public function index()
+    {
+        $players = Player::all();
+        $teams = Team::all(); 
+        return view('players.index', compact('players', 'teams'));
+    }
 
     public function create()
     {
-        return view('players.create');
+        $teams = Team::all(); // Retrieve teams for the create form
+        return view('players.create', compact('teams'));
     }
 
     public function store(Request $request)
@@ -40,7 +43,8 @@ public function index()
 
     public function edit(Player $player)
     {
-        return view('players.edit', compact('player'));
+        $teams = Team::all();
+        return view('players.edit', compact('player', 'teams'));
     }
 
     public function update(Request $request, Player $player)
