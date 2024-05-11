@@ -55,6 +55,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         th, td {
             padding: 10px;
@@ -71,41 +72,74 @@
         tr:hover {
             background-color: #ddd;
         }
+        .create-button {
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+        }
+
+        .create-button:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
 <div class="header">
-        <h1>FootballWorld</h1>
-        <div class="left-links">
-            <a href="{{ url('/') }}">Home</a>
-        </div>
-        <div class="right-links">
-            <a href="{{ route('players.index') }}">Players</a>
-            <a href="{{ route('teams.index') }}">Teams</a>
-        </div>
+    <h1>FootballWorld</h1>
+    <div class="left-links">
+        <a href="{{ url('/') }}">Home</a>
     </div>
+    <div class="right-links">
+        <a href="{{ route('players.index') }}">Players</a>
+        <a href="{{ route('teams.index') }}">Teams</a>
+    </div>
+</div>
 
-    <div class="container">
-        <h1>Players</h1>
+<div class="container">
+    <h1>Players</h1>
+
+    @if($players->isEmpty())
+        <p>No players available.</p>
+    @else
         <table>
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Team</th>
-                    <!-- Add more columns as needed -->
-                </tr>
+            <tr>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
             </thead>
             <tbody>
-                <!-- Iterate through players and display their information -->
-                @foreach($players as $player)
-                    <tr>
-                        <td>{{ $player->name }}</td>
-                        <td>{{ $player->team->name }}</td>
-                        <!-- Add more columns as needed -->
-                    </tr>
-                @endforeach
+            @foreach($players as $player)
+                <tr>
+                    <td>{{ $player->name }}</td>
+                    <td>{{ $player->team->name }}</td>
+                    <td><a href="{{ route('players.show', $player->id) }}">Details</a></td>
+                    <td><a href="{{ route('players.edit', $player->id) }}">Edit</a></td>       
+                    <td>
+                        <form action="{{ route('players.destroy', $player->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
-    </div>
+        <a href="{{ route('players.create', $player->id) }}" class="create-button">Create Player</a>
+
+    @endif
+</div>
 </body>
 </html>

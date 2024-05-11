@@ -26,9 +26,9 @@ Route::delete('/teams/{team}', 'TeamController@destroy')->name('teams.destroy');
 
 
 Route::get('/players', [PlayerController::class, 'index'])->name('players.index');
-Route::get('/players/create', 'PlayerController@create')->name('players.create');
-Route::post('/players', 'PlayerController@store')->name('players.store');
-Route::get('/players/{player}', 'PlayerController@show')->name('players.show');
-Route::get('/players/{player}/edit', 'PlayerController@edit')->name('players.edit');
-Route::put('/players/{player}', 'PlayerController@update')->name('players.update');
-Route::delete('/players/{player}', 'PlayerController@destroy')->name('players.destroy');
+Route::get('/players/{player}/create', [PlayerController::class, 'create'])->name('players.create');
+Route::post('/players', [PlayerController::class, 'store'])->name('players.store');
+Route::get('/players/{player}/edit', [PlayerController::class, 'edit'])->name('players.edit');
+Route::put('/players/{player}', [PlayerController::class, 'update'])->name('players.update');
+Route::delete('/players/{player}', [PlayerController::class, 'destroy'])->name('players.destroy');
+Route::get('/players/{player}', [PlayerController::class, 'show'])->name('players.show');

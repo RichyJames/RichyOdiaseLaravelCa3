@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Player;
-use App\Models\Team; 
+use App\Models\Team;
 
 class PlayerController extends Controller
 {
@@ -17,7 +17,7 @@ class PlayerController extends Controller
 
     public function create()
     {
-        $teams = Team::all(); // Retrieve teams for the create form
+        $teams = Team::all();
         return view('players.create', compact('teams'));
     }
 
@@ -56,9 +56,9 @@ class PlayerController extends Controller
             'age' => 'required|integer|min:0',
             'nationality' => 'required|string|max:255',
         ]);
-
+    
         $player->update($request->all());
-
+    
         return redirect()->route('players.index')->with('success', 'Player updated successfully.');
     }
 
